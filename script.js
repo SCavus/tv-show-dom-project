@@ -11,7 +11,7 @@ function makePageForEpisodes(episodeList) {
   const searchInput = document.createElement("input")
   const episodeNum = document.createElement('p')
 
-  //displayPage(episodeList)
+  displayPage(episodeList)
   searchInput.type = 'text'
   searchInput.placeholder = 'Search'
   searchDiv.appendChild(searchInput)
@@ -19,7 +19,7 @@ function makePageForEpisodes(episodeList) {
   episodeNum.style.marginLeft = '30px'
   episodeNum.textContent = `${episodeList.length} episode(s)`
 
-  let search = searchInput.addEventListener('keyup', function(){
+  searchInput.addEventListener('keyup', function(){
     let term = searchInput.value.toLowerCase()
     let filterEpisode = episodeList.filter(element => 
       element.name.toLowerCase().includes(term) || 
