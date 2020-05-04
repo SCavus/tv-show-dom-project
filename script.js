@@ -24,7 +24,7 @@ function setup() {
     selectShow.className = "selectshow";
     search.appendChild(selectShow);
     let selectEpisode = document.createElement("select");
-    selectEpisode.className = "select";
+    selectEpisode.className = "selectepisode";
     search.appendChild(selectEpisode);
     searchInput.type = "text";
     searchInput.placeholder = "Search";
@@ -39,22 +39,25 @@ function setup() {
       displayPage(data);
       oneShow(data);
       displayEpisode(data);
+      searchTerm(data)
     })
     .catch((error) => console.log(error));
 
 //Makes search on episodes of selected show
-    searchInput.addEventListener("keyup", function (e) {
-      e.preventDefault();
-      let term = searchInput.value.toLowerCase();
-      let filterEpisode = episodeList.filter(
-        (element) =>
-          element.name.toLowerCase().includes(term) ||
-          element.summary.toLowerCase().includes(term)
-      );
-      //This part displays the searched elements
-      displayPage(filterEpisode);
-      episodeNum.textContent = `${filterEpisode.length} episode(s)`;
-    });
+    function searchTerm (array) {
+      searchInput.addEventListener("keyup", function (e) {
+        e.preventDefault();
+        let term = searchInput.value.toLowerCase();
+        let filterEpisode = array.filter(
+          (element) =>
+            element.name.toLowerCase().includes(term) ||
+            element.summary.toLowerCase().includes(term)
+        );
+        //This part displays the searched elements
+        displayPage(filterEpisode);
+        episodeNum.textContent = `${filterEpisode.length} episode(s)`;
+      })
+    }
     
     //Creates the tags and set up the HTML elements
     function displayPage(episodeList) {
@@ -97,6 +100,7 @@ function setup() {
           displayPage(data);
           oneShow(data);
           displayEpisode(data);
+          searchTerm(data)
         })
         .catch((error) => console.log(error));
     });
